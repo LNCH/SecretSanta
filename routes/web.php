@@ -37,37 +37,37 @@ Route::get('draws', function () {
             'exclusions' => ['tom'],
             'draws' => [],
             'displayName' => 'Hanna',
-            'email' => 'tom@lnch.co.uk',
+            'email' => 'hanna.pickering5693@gmail.com',
         ],
         'daniel' => [
             'exclusions' => ['jade'],
             'draws' => [],
             'displayName' => 'Daniel',
-            'email' => 'tom@lnch.co.uk',
+            'email' => 'picked88@hotmail.co.uk',
         ],
         'jade' => [
             'exclusions' => ['daniel'],
             'draws' => [],
             'displayName' => 'Jade',
-            'email' => 'tom@lnch.co.uk',
+            'email' => 'jade_heatley@hotmail.com',
         ],
         'jack' => [
             'exclusions' => [],
             'draws' => [],
             'displayName' => 'Jack',
-            'email' => 'tom@lnch.co.uk',
+            'email' => 'jackhenningpickering@gmail.com',
         ],
         'susanna' => [
             'exclusions' => ['chris'],
             'draws' => [],
             'displayName' => 'Susanna',
-            'email' => 'tom@lnch.co.uk',
+            'email' => 'susanna.krogh@hotmail.co.uk',
         ],
         'chris' => [
             'exclusions' => ['susanna'],
             'draws' => [],
             'displayName' => 'Chris',
-            'email' => 'tom@lnch.co.uk',
+            'email' => 'cj.pickering@hotmail.co.uk',
         ],
     ];
 
@@ -135,9 +135,10 @@ Route::get('draws', function () {
     $drawResults = drawNames($players, 2);
 
     // Process results by emailing the recipients with their results
-    $player = array_shift($drawResults);
-    $notificationEmail = new \App\Mail\SecretSantaNames(player: $player);
-    Mail::to($player['email'])->send($notificationEmail);
+    foreach ($drawResults as $player) {
+        $notificationEmail = new \App\Mail\SecretSantaNames(player: $player);
+        Mail::to($player['email'])->send($notificationEmail);
+    }
 
-    dd($drawResults);
+    dd('Emails should have been sent successfully!');
 });
